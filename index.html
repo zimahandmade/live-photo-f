@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>تابلو زنده شما</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
-        .hidden { display: none !important; }
-
-        /* --- صفحه شروع --- */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .hidden {
+            display: none !important;
+        }
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('./zima.jpg');
             background-size: cover;
             background-position: center center;
@@ -20,22 +28,19 @@
             align-items: center;
             z-index: 3;
         }
-        
         #start-container {
             text-align: center;
             max-width: 90%;
         }
-
         #start-container p {
             font-size: 24px;
             font-weight: bold;
             line-height: 1.6;
-            color: #FFA500; /* نارنجی */
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9); /* سایه مشکی قوی */
+            color: #FFA500;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
             margin: 0 0 30px 0;
             padding: 10px;
         }
-        
         #start-button {
             padding: 15px 50px;
             font-size: 20px;
@@ -49,35 +54,62 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             animation: glow-pulse 2s infinite;
         }
-
         @keyframes glow-pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-        
-        /* --- سایر بخش‌های UI --- */
         #ui-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10003; pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10003;
+            pointer-events: none;
         }
         #toggle-view-button {
             pointer-events: auto;
-            position: absolute; top: 20px; right: 20px;
-            padding: 8px 12px; font-size: 14px; font-weight: bold;
-            color: white; background-color: rgba(0, 0, 0, 0.6);
-            border: none; border-radius: 8px; cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
         #modal-player {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.9); z-index: 10002;
-            display: flex; justify-content: center; align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 10002;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        #modal-player video { width: 95%; height: 95%; object-fit: contain; }
-        #ar-scene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        #modal-player video {
+            width: 95%;
+            height: 95%;
+            object-fit: contain;
+        }
+        #ar-scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
     </style>
 </head>
-<body class="before-start">
+<body>
 
     <div id="splash-screen">
         <div id="start-container">
@@ -92,13 +124,22 @@
     
     <div id="modal-player" class="hidden"></div>
     
-    <a-scene id="ar-scene" class="hidden" mindar-image="imageTargetSrc: ./targets.mind; autoStart: false" vr-mode-ui="enabled: false" color-space="sRGB">
+    <a-scene id="ar-scene" class="hidden" mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; filterMinCF: 0.001; filterBeta: 10;" vr-mode-ui="enabled: false" color-space="sRGB">
         <a-assets>
             <video id="ar-video" src="./video.mp4" loop playsinline webkit-playsinline></video>
         </a-assets>
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         <a-entity id="target-entity" mindar-image-target="targetIndex: 0">
-            <a-video id="ar-video-plane" src="#ar-video" rotation="0 0 0" position="0 0 0"></a-video>
+            <!--
+                *** این خط مهمترین تغییر است ***
+                برای اینکه ویدیو کاملاً هم اندازه قاب عکس شما باشد، باید نسبت ابعاد (طول به عرض) آن را اینجا تنظیم کنید.
+                یک خط کش بردارید و طول و عرض عکسی که به عنوان هدف استفاده کرده اید را اندازه بگیرید.
+                سپس ارتفاع را تقسیم بر عرض کنید.
+                مثال: اگر عکس شما 15 سانتی متر ارتفاع و 12 سانتی متر عرض دارد: 15 / 12 = 1.25
+                حالا عدد به دست آمده را در قسمت height="" قرار دهید.
+                width همیشه باید "1" باشد.
+            -->
+            <a-video id="ar-video-plane" src="#ar-video" width="1" height="1.466" rotation="0 0 0" position="0 0 0"></a-video>
         </a-entity>
     </a-scene>
 
@@ -108,20 +149,12 @@
             const splashScreen = document.querySelector("#splash-screen");
             const sceneEl = document.querySelector("#ar-scene");
             const arVideo = document.querySelector("#ar-video");
-            const arVideoPlane = document.querySelector("#ar-video-plane");
             const targetEntity = document.querySelector("#target-entity");
             const uiContainer = document.querySelector("#ui-container");
             const toggleViewButton = document.querySelector("#toggle-view-button");
             const modalPlayer = document.querySelector("#modal-player");
-            const bodyEl = document.querySelector("body");
 
             let isModalMode = false;
-
-            arVideo.addEventListener('loadedmetadata', () => {
-                const w = arVideo.videoWidth;
-                const h = arVideo.videoHeight;
-                arVideoPlane.setAttribute('scale', `${w/h > 1 ? 1 : w/h} ${w/h > 1 ? h/w : 1} 1`);
-            });
 
             startButton.addEventListener('click', () => {
                 splashScreen.classList.add('hidden');
