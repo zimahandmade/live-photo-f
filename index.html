@@ -41,27 +41,17 @@
             background-color: transparent;
             padding: 20px;
             border-radius: 15px;
-            /* Removed margin-top to let flexbox handle centering */
-        }
-        #start-container p {
-            font-size: 24px;
-            font-weight: bold;
-            line-height: 1.6;
-            /* --- UPDATED to match the color from your image design --- */
-            color: #3a241d;
-            /* Removed text shadow */
-            text-shadow: none;
-            margin: 0 0 10px 0;
-            padding: 10px;
+            /* --- ADDED MARGIN-TOP TO MOVE THE CONTAINER DOWN --- */
+            margin-top: 30vh; /* This pushes the container down by 30% of the viewport height */
         }
         /* --- UPDATED BUTTON STYLE --- */
         #start-button {
             padding: 12px 40px;
             font-size: 18px;
             font-weight: bold;
-            /* --- UPDATED to match the color from your image design --- */
-            color: #3a241d;
-            border: 2px solid #3a241d;
+            /* --- COLOR CHANGED AS REQUESTED --- */
+            color: #002744;
+            border: 2px solid #002744;
             background-color: transparent;
             border-radius: 50px;
             cursor: pointer;
@@ -72,7 +62,8 @@
         }
         /* --- UPDATED HOVER EFFECT --- */
         #start-button:hover {
-            background-color: #3a241d;
+            /* --- COLOR CHANGED AS REQUESTED --- */
+            background-color: #002744;
             color: white;
             transform: scale(1.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -81,15 +72,16 @@
         @keyframes glow-pulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 5px rgba(58, 36, 29, 0);
+                box-shadow: 0 0 5px rgba(0, 39, 68, 0);
             }
             50% {
                 transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(58, 36, 29, 0.7);
+                /* --- GLOW COLOR CHANGED AS REQUESTED --- */
+                box-shadow: 0 0 20px rgba(0, 39, 68, 0.7);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 5px rgba(58, 36, 29, 0);
+                box-shadow: 0 0 5px rgba(0, 39, 68, 0);
             }
         }
         /* General UI container for buttons */
@@ -158,7 +150,7 @@
     <!-- Splash screen shown on page load -->
     <div id="splash-screen">
         <div id="start-container">
-            <!-- The paragraph with the instruction text has been removed -->
+            <!-- The instruction text has been removed -->
             <button id="start-button">بزن بریم</button>
         </div>
     </div>
