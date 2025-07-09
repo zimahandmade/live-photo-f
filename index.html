@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #222; /* Added a fallback background color */
+            background-color: #222;
         }
         /* Utility class to hide elements */
         .hidden {
@@ -25,55 +25,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* IMPORTANT: Replaced local file with a placeholder. Replace with your own image URL. */
-            background-image: url('https://placehold.co/1920x1080/333/FFA500?text=Your+Image+Here');
+            /* --- UPDATED to use your image from GitHub --- */
+            background-image: url('https://zimahandmade.github.io/live-photo-f/zima.JPG');
             background-size: cover;
             background-position: center center;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10004; /* Ensure it's on top */
+            z-index: 10004;
             text-align: center;
         }
         #start-container {
             max-width: 90%;
-            background-color: rgba(0, 0, 0, 0.5); /* Added a semi-transparent background for better text readability */
+            /* Removed background color to show the image fully */
+            background-color: transparent;
             padding: 20px;
             border-radius: 15px;
+            /* Removed margin-top to let flexbox handle centering */
         }
         #start-container p {
             font-size: 24px;
             font-weight: bold;
             line-height: 1.6;
-            color: #FFA500;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
-            margin: 0 0 10px 0; /* Adjusted bottom margin */
+            /* --- UPDATED to match the color from your image design --- */
+            color: #3a241d;
+            /* Removed text shadow */
+            text-shadow: none;
+            margin: 0 0 10px 0;
             padding: 10px;
         }
-        /* --- UPDATED BUTTON STYLE: TRANSPARENT WITH COLORED BORDER/TEXT --- */
+        /* --- UPDATED BUTTON STYLE --- */
         #start-button {
             padding: 12px 40px;
             font-size: 18px;
             font-weight: bold;
-            /* Text and border color set to the requested color */
-            color: #002744;
-            border: 2px solid #002744;
-            /* Transparent background */
+            /* --- UPDATED to match the color from your image design --- */
+            color: #3a241d;
+            border: 2px solid #3a241d;
             background-color: transparent;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, color 0.4s ease;
             animation: glow-pulse 2.5s infinite;
-            /* --- ADDED MARGIN-TOP TO MOVE BUTTON DOWN --- */
-            margin-top: 40px;
+            /* Removed margin-top as the container is now centered */
         }
         /* --- UPDATED HOVER EFFECT --- */
         #start-button:hover {
-            /* Invert colors on hover */
-            background-color: #002744;
+            background-color: #3a241d;
             color: white;
-            /* Increased scale and shadow for a more pronounced effect */
             transform: scale(1.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
@@ -81,16 +81,15 @@
         @keyframes glow-pulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 5px rgba(0, 39, 68, 0);
+                box-shadow: 0 0 5px rgba(58, 36, 29, 0);
             }
             50% {
                 transform: scale(1.05);
-                /* Glow with a lighter shade of the border color */
-                box-shadow: 0 0 20px rgba(0, 39, 68, 0.7);
+                box-shadow: 0 0 20px rgba(58, 36, 29, 0.7);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 5px rgba(0, 39, 68, 0);
+                box-shadow: 0 0 5px rgba(58, 36, 29, 0);
             }
         }
         /* General UI container for buttons */
@@ -101,13 +100,13 @@
             width: 100%;
             height: 100%;
             z-index: 10003;
-            pointer-events: none; /* Allows clicks to go through to the AR scene */
+            pointer-events: none;
         }
         /* Button to toggle between AR and fullscreen video */
         #toggle-view-button {
-            pointer-events: auto; /* Makes the button clickable */
+            pointer-events: auto;
             position: absolute;
-            bottom: 20px; /* Moved to bottom for better ergonomics */
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             padding: 12px 20px;
@@ -159,49 +158,39 @@
     <!-- Splash screen shown on page load -->
     <div id="splash-screen">
         <div id="start-container">
-            <p>قاب عکستو جلو دوربین گوشی بگیر تا سوپرایزت کنم</p>
-            <!-- English text paragraph removed -->
+            <!-- The paragraph with the instruction text has been removed -->
             <button id="start-button">بزن بریم</button>
         </div>
     </div>
     
     <!-- Container for UI elements like buttons -->
     <div id="ui-container" class="hidden">
-        <button id="toggle-view-button">پخش تمام صفحه (Fullscreen)</button>
+        <button id="toggle-view-button">پخش تمام صفحه</button>
     </div>
     
     <!-- Modal for playing the video in fullscreen -->
     <div id="modal-player" class="hidden"></div>
     
-    <!-- A-Frame Scene for AR. Note the updated paths and properties -->
-    <!-- IMPORTANT: You MUST replace 'path/to/your/targets.mind' with a URL to your own compiled target file. -->
+    <!-- A-Frame Scene for AR -->
+    <!-- --- UPDATED to use your .mind file from GitHub --- -->
     <a-scene 
         id="ar-scene" 
         class="hidden" 
-        mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind; autoStart: false; filterMinCF: 0.001; filterBeta: 10;" 
+        mindar-image="imageTargetSrc: https://zimahandmade.github.io/live-photo-f/targets.mind; autoStart: false; filterMinCF: 0.001; filterBeta: 10;" 
         vr-mode-ui="enabled: false" 
         device-orientation-permission-ui="enabled: false"
         color-space="sRGB"
         renderer="logarithmicDepthBuffer: true;">
 
         <a-assets>
-            <!-- IMPORTANT: Replaced local video with a placeholder. Replace with your own video URL. -->
-            <video id="ar-video" src="https://assets.mixkit.co/videos/preview/mixkit-a-hill-covered-in-green-in-the-middle-of-the-4293-large.mp4" loop playsinline webkit-playsinline crossorigin="anonymous"></video>
+            <!-- --- UPDATED to use your video file from GitHub --- -->
+            <video id="ar-video" src="https://zimahandmade.github.io/live-photo-f/video.mp4" loop playsinline webkit-playsinline crossorigin="anonymous"></video>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
         
         <a-entity id="target-entity" mindar-image-target="targetIndex: 0">
-            <!--
-                *** This is the most important change ***
-                To make the video fit your picture frame perfectly, you must set its aspect ratio here.
-                1. Measure the height and width of the image you used as the AR target.
-                2. Divide the height by the width.
-                Example: If your photo is 15cm high and 10cm wide: 15 / 10 = 1.5
-                3. Now set the 'height' attribute below to the number you calculated.
-                The 'width' should always be "1".
-            -->
-            <a-video id="ar-video-plane" src="#ar-video" width="1" height="0.55" rotation="0 0 0" position="0 0 0"></a-video>
+            <a-video id="ar-video-plane" src="#ar-video" width="1" height="1.5" rotation="0 0 0" position="0 0 0"></a-video>
         </a-entity>
     </a-scene>
 
@@ -218,35 +207,30 @@
             const modalPlayer = document.querySelector("#modal-player");
 
             let isModalMode = false;
-            let modalVideo = null; // To hold the video element for the modal
+            let modalVideo = null;
 
             // Function to start the AR experience
             const startExperience = () => {
                 splashScreen.classList.add('hidden');
                 sceneEl.classList.remove('hidden');
                 
-                // Start the MindAR system
                 const mindarSystem = sceneEl.systems['mindar-image-system'];
                 if (mindarSystem) {
                     mindarSystem.start();
                 }
 
-                // Mute the video initially to help with autoplay policies
                 arVideo.muted = true;
                 arVideo.play().catch(e => console.error("AR Video autoplay was prevented:", e));
-                arVideo.pause(); // Pause immediately, will be played when target is found
+                arVideo.pause();
                 arVideo.muted = false;
             };
 
-            // Event listener for the start button
             startButton.addEventListener('click', startExperience);
 
-            // Event listener for when the AR scene is ready
             sceneEl.addEventListener("arReady", () => {
                 console.log("MindAR is ready");
             });
 
-            // Event listener for when the image target is found
             targetEntity.addEventListener("targetFound", () => {
                 console.log("Target Found");
                 arVideo.play();
@@ -255,7 +239,6 @@
                 }
             });
 
-            // Event listener for when the image target is lost
             targetEntity.addEventListener("targetLost", () => {
                 console.log("Target Lost");
                 arVideo.pause();
@@ -264,18 +247,16 @@
                 }
             });
 
-            // Event listener for the toggle view button
             toggleViewButton.addEventListener('click', () => {
                 const currentTime = arVideo.currentTime;
                 
-                isModalMode = !isModalMode; // Toggle the mode
+                isModalMode = !isModalMode;
 
                 if (isModalMode) {
-                    // --- Switch to Fullscreen (Modal) View ---
+                    // Switch to Fullscreen (Modal) View
                     arVideo.pause();
                     modalPlayer.classList.remove('hidden');
                     
-                    // Create a new video element for the modal view
                     modalVideo = document.createElement('video');
                     modalVideo.src = arVideo.src;
                     modalVideo.currentTime = currentTime;
@@ -285,27 +266,26 @@
                     modalVideo.playsInline = true;
                     modalVideo.webkitPlaysInline = true;
                     
-                    modalPlayer.innerHTML = ''; // Clear previous content
+                    modalPlayer.innerHTML = '';
                     modalPlayer.appendChild(modalVideo);
                     
-                    toggleViewButton.textContent = "پخش AR (AR View)";
+                    toggleViewButton.textContent = "پخش AR";
                 } else {
-                    // --- Switch back to AR View ---
+                    // Switch back to AR View
                     if (modalVideo) {
-                        arVideo.currentTime = modalVideo.currentTime; // Sync time back
+                        arVideo.currentTime = modalVideo.currentTime;
                         modalVideo.pause();
                     }
                     
-                    modalPlayer.innerHTML = ''; // Clear the modal
+                    modalPlayer.innerHTML = '';
                     modalPlayer.classList.add('hidden');
                     modalVideo = null;
                     
-                    // Only play the AR video if the target is currently visible
                     if (targetEntity.getAttribute('mindar-image-target').visible) {
                         arVideo.play();
                     }
                     
-                    toggleViewButton.textContent = "پخش تمام صفحه (Fullscreen)";
+                    toggleViewButton.textContent = "پخش تمام صفحه";
                 }
             });
         });
